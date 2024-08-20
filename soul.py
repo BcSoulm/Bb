@@ -221,12 +221,13 @@ def send_welcome(message):
     btn4 = KeyboardButton("My Account🏦")
     btn5 = KeyboardButton("Help❓")
     btn6 = KeyboardButton("Contact admin✔️")
+    btn7 = KeyboardButton("Check Ping 🛜")
 
     # Add buttons to the markup
     markup.add(btn1, btn2, btn3, btn4, btn5, btn6)
 
     bot.send_message(message.chat.id, "*Choose an option:*", reply_markup=markup, parse_mode='Markdown')
-
+        
 @bot.message_handler(func=lambda message: True)
 def handle_message(message):
     if message.text == "Instant Plan 🧡":
@@ -255,6 +256,11 @@ def handle_message(message):
         bot.reply_to(message, "*Help selected*", parse_mode='Markdown')
     elif message.text == "Contact admin✔️":
         bot.reply_to(message, "*@Bishal_M1*", parse_mode='Markdown')
+    elif message.text == "Check Ping 🛜":
+        start_time = time.time()
+        bot.reply_to(message, "Check Ping 🛜!")
+        ping = (time.time() - start_time)
+        bot.send_message(message.chat.id, f"Bot Ping : {ping:.2f} ms")
     else:
         bot.reply_to(message, "*Invalid option*", parse_mode='Markdown')
 
